@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
-import { SafeAreaView, Text, View } from '../../components/Themed';
-import { getAllUsers } from '../../services/users.service';
+import { SafeAreaView, Text, TextInput, View } from '../../components/Themed';
+import { getAllUsers, getFullName } from '../../services/users.service';
 import User from '../../types/user.type';
 import UserCard from '../../components/UserCard';
 import styles from './styles';
@@ -12,9 +12,10 @@ import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 type Props = RootStackScreenProps<'Root'>;
 
 export default function UsersScreen({ navigation }: Props) {
-  const users = useAppSelector(state => state.users);
+  const users = useAppSelector((state) => state.users);
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     getAllUsers()
@@ -25,13 +26,19 @@ export default function UsersScreen({ navigation }: Props) {
       .catch(console.error);
   }, []);
 
-  const handleDelete = (user: User) => () =>
-    dispatch(removeUser(user.id));
+  const handleDelete = (user: User) => () => dispatch(removeUser(user.id));
 
   const handleUserPress = (user: User) => () =>
     navigation.navigate('UserInfo', { user });
 
   const handleAddUser = () => navigation.navigate('AddUser');
+
+  const filterUsers = () =>
+    users.filter((user) =>
+      getFullName(user)
+        .toLowerCase()
+        .includes(search.replace(/\s+/g, '').toLowerCase())
+    );
 
   const ListHeader = (): JSX.Element =>
     loading ? (
@@ -44,8 +51,13 @@ export default function UsersScreen({ navigation }: Props) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <TextInput
+        style={styles.searchInput}
+        placeholder="Search"
+        onChangeText={setSearch}
+      />
       <FlatList
-        data={users}
+        data={filterUsers()}
         renderItem={({ item }) => (
           <UserCard
             containerStyle={{

@@ -38,5 +38,9 @@ export default StyleSheet.create({
     buttonText: {
         fontSize: 20,
         color: "white"
+    },
+    searchInput: {
+        marginVertical: 10,
+        padding: 10,
     }
 });

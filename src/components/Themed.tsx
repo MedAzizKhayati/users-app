@@ -105,16 +105,20 @@ export function TouchableOpacity(props: TouchableOpacityProps) {
 
 export function TextInput(props: TextInputProps) {
   const { style, lightColor, darkColor, ...otherProps } = props;
-  const colorScheme = useColorScheme();
   const backgroundColor = useThemeColor(
     { light: lightColor, dark: darkColor },
     'secondaryBackground'
   );
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+  const placeHolderTextColor = useThemeColor(
+    { light: lightColor, dark: darkColor },
+    'tint'
+  );
 
   return (
     <DefaultTextInput
       style={[{ backgroundColor, color }, style]}
+      placeholderTextColor={placeHolderTextColor}
       {...otherProps}
     />
   );
