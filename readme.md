@@ -9,3 +9,8 @@ To run the project:
 <p> <img align="center" src="./src/assets/images//screenshot1.png?raw=true&style=centerme" /> </p>
 <br>
 
+<p> <img align="center" src="./src//assets//images/screenshot2.png?raw=true&style=centerme" /> </p>
+<br>
+
+<p> <img align="center" src="./src//assets//images/screenshot3.png?raw=true&style=centerme" /> </p>
+
