@@ -6,7 +6,7 @@ To run the project:
    $ npm install / yarn install
 2. Run the project:
    $ npm start / yarn start / expo start
-<p> <img align="center" src="./src/assets/images//screenshot1.png?raw=true&style=centerme" /> </p>
+<p align="center"> <img align="center" src="./src/assets/images//screenshot1.png?raw=true&style=centerme" /> </p>
 <br>
 
 <p> <img align="center" src="./src//assets//images/screenshot2.png?raw=true&style=centerme" /> </p>
